@@ -11,7 +11,7 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y 
 
 ## [0.1.0] - 2026-10-09
 
-Primera versión, sacada del `ScrollContainer` y el `useScrollOverflow` de mapalab.
+Primera versión.
 
 ### Agregado
 
