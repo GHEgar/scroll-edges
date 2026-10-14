@@ -5,6 +5,13 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y 
 
 ## [No publicado]
 
+### Agregado
+
+- Demo en Vite (`npm run demo`) con una lista de header sticky, una lista con `edgeMask` y una fila
+  horizontal, publicada en GitHub Pages.
+- Pruebas e2e en Playwright (`npm run e2e`): orillas al desplazar, `inset.top` bajo el header,
+  máscara y flechas que saltan.
+
 ### Cambiado
 
 - El lint usa `@ghegar/eslint-config` (presets `base`, `react` y `ts`) en lugar de una config propia.

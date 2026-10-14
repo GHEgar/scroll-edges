@@ -8,6 +8,8 @@ Headless scroll overflow for React: which edges hide content, sticky insets, jum
 
 ![Three scroll containers showing edge flags, jump arrows and the edge mask appear and disappear while they scroll](.github/assets/demo.gif)
 
+**[Live demo](https://ghegar.github.io/scroll-edges/)**
+
 scroll-edges owns the measuring — which edges of a scroll container hide content, how tall the stuck
 sticky header is, when to measure again — and you own every pixel: it ships no styles, only state,
 `data-*`/ARIA attributes and functional inline style (sticky anchors and an optional `mask-image`).
@@ -143,9 +145,12 @@ npm test
 npm run lint
 npm run typecheck
 npm run build
+npm run demo
+npm run e2e
 ```
 
-Tests run on Vitest with happy-dom.
+Tests run on Vitest with happy-dom. `npm run demo` serves the demo in `demo/` with Vite, and
+`npm run e2e` runs it through Playwright in a real browser.
 
 ## Contributing
 

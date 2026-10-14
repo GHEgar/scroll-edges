@@ -3,3 +3,5 @@ dist
 coverage
 *.log
 test-results
+demo-dist
+playwright-report
