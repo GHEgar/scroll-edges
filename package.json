@@ -2,6 +2,15 @@
     "name": "scroll-edges",
     "version": "0.1.0",
     "description": "Headless scroll overflow for React: which edges hide content, sticky insets, jump-to-edge arrows and an edge mask.",
+    "keywords": [
+        "react",
+        "scroll",
+        "overflow",
+        "scroll-shadow",
+        "sticky",
+        "headless",
+        "hooks"
+    ],
     "license": "AGPL-3.0-only",
     "author": "Edgar Villarreal",
     "type": "module",
