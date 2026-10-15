@@ -1,4 +1,4 @@
-import '@npmegar/rotulo';
+import 'rotulo';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { MaskList, StickyList, YearRow } from './Lists';
