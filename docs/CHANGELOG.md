@@ -15,6 +15,7 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y 
 ### Cambiado
 
 - El lint usa `@ghegar/eslint-config` (presets `base`, `react` y `ts`) en lugar de una config propia.
+- El demo usa los íconos de tesela.
 
 ## [0.1.0] - 2026-10-09
 

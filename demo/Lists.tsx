@@ -1,4 +1,5 @@
 import { useScrollEdges } from 'scroll-edges/react';
+import { ChevronDown, ChevronLeft, ChevronRight, ChevronUp } from 'tesela/react';
 import { Pills } from './Pills';
 
 const LAYERS = ['Roads', 'Rivers', 'Parcels', 'Buildings', 'Contours', 'Schools', 'Parks', 'Rail', 'Wells', 'Bridges', 'Hospitals', 'Lakes', 'Zoning', 'Census', 'Soils', 'Faults'];
@@ -12,11 +13,11 @@ export function StickyList() {
             <div {...getContainerProps({ className: 'box v', 'data-testid': 'sticky' })}>
                 <div className="header" data-sticky="" data-testid="sticky-header">Layers</div>
                 <div {...getAnchorProps('top')} className="anchor">
-                    {state.top && <button {...getArrowProps('top')} className="arrow" data-testid="sticky-arrow-top">↑</button>}
+                    {state.top && <button {...getArrowProps('top')} className="arrow" data-testid="sticky-arrow-top"><ChevronUp size={22} stroke={2} /></button>}
                 </div>
                 {LAYERS.map((layer) => <div key={layer} className="item">{layer}</div>)}
                 <div {...getAnchorProps('bottom')} className="anchor">
-                    {state.bottom && <button {...getArrowProps('bottom')} className="arrow" data-testid="sticky-arrow-bottom">↓</button>}
+                    {state.bottom && <button {...getArrowProps('bottom')} className="arrow" data-testid="sticky-arrow-bottom"><ChevronDown size={22} stroke={2} /></button>}
                 </div>
             </div>
             <Pills id="sticky" state={state} edges={['top', 'bottom']} inset="top" />
@@ -31,11 +32,11 @@ export function MaskList() {
             <h2>Edge mask · jump arrows</h2>
             <div {...getContainerProps({ className: 'box v', 'data-testid': 'mask' })}>
                 <div {...getAnchorProps('top')} className="anchor">
-                    {state.top && <button {...getArrowProps('top')} className="arrow" data-testid="mask-arrow-top">↑</button>}
+                    {state.top && <button {...getArrowProps('top')} className="arrow" data-testid="mask-arrow-top"><ChevronUp size={22} stroke={2} /></button>}
                 </div>
                 {LAYERS.map((layer) => <div key={layer} className="item">{layer}</div>)}
                 <div {...getAnchorProps('bottom')} className="anchor">
-                    {state.bottom && <button {...getArrowProps('bottom')} className="arrow" data-testid="mask-arrow-bottom">↓</button>}
+                    {state.bottom && <button {...getArrowProps('bottom')} className="arrow" data-testid="mask-arrow-bottom"><ChevronDown size={22} stroke={2} /></button>}
                 </div>
             </div>
             <Pills id="mask" state={state} edges={['top', 'bottom']} />
@@ -50,11 +51,11 @@ export function YearRow() {
             <h2>axis: &apos;x&apos; · jump arrows</h2>
             <div {...getContainerProps({ className: 'box h', 'data-testid': 'row' })}>
                 <div {...getAnchorProps('left')} className="anchor">
-                    {state.left && <button {...getArrowProps('left')} className="arrow" data-testid="row-arrow-left">←</button>}
+                    {state.left && <button {...getArrowProps('left')} className="arrow" data-testid="row-arrow-left"><ChevronLeft size={22} stroke={2} /></button>}
                 </div>
                 {YEARS.map((year) => <div key={year} className="chip">{year}</div>)}
                 <div {...getAnchorProps('right')} className="anchor">
-                    {state.right && <button {...getArrowProps('right')} className="arrow" data-testid="row-arrow-right">→</button>}
+                    {state.right && <button {...getArrowProps('right')} className="arrow" data-testid="row-arrow-right"><ChevronRight size={22} stroke={2} /></button>}
                 </div>
             </div>
             <Pills id="row" state={state} edges={['left', 'right']} />
