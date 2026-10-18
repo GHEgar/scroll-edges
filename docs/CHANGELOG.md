@@ -11,6 +11,8 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y 
   horizontal, publicada en GitHub Pages.
 - Pruebas e2e en Playwright (`npm run e2e`): orillas al desplazar, `inset.top` bajo el header,
   máscara y flechas que saltan.
+- `release.yml`: un tag `vX.Y.Z` corre las pruebas, crea el release con su sección del CHANGELOG y
+  publica en npm con procedencia y en GitHub Packages.
 
 ### Cambiado
 
