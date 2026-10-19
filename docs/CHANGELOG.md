@@ -5,6 +5,8 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y 
 
 ## [No publicado]
 
+## [0.1.1] - 2026-10-19
+
 ### Agregado
 
 - Demo en Vite (`npm run demo`) con una lista de header sticky, una lista con `edgeMask` y una fila
