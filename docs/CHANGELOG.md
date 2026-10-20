@@ -5,6 +5,15 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y 
 
 ## [No publicado]
 
+## [0.2.0] - 2026-10-19
+
+### Agregado
+
+- Sombras de orilla como alternativa a la máscara: opción `shadow` (`true` o `{ size, color }`) y
+  `getShadowProps(edge)` en `useScrollEdges`, y `edgeShadow(edge, visible, options)` en el core. La
+  sombra vive dentro del ancla, sigue el `inset` sticky y no difumina los encabezados fijos.
+- El demo muestra las sombras en la lista con encabezado sticky.
+
 ## [0.1.1] - 2026-10-19
 
 ### Agregado

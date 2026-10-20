@@ -119,6 +119,10 @@ h1 code {
     z-index: 3;
 }
 
+.shadow {
+    transition: opacity 0.2s ease;
+}
+
 .box.h .anchor {
     align-self: stretch;
 }

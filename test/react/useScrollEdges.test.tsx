@@ -17,10 +17,12 @@ function List(options: UseScrollEdgesOptions) {
     return (
         <div {...edges.getContainerProps({ className: 'list', 'aria-label': 'list' })}>
             <div {...edges.getAnchorProps('top')}>
+                <span {...edges.getShadowProps('top')} data-testid="shadow-top" />
                 {edges.state.top && <button {...edges.getArrowProps('top')}>up</button>}
             </div>
             <p>item</p>
             <div {...edges.getAnchorProps('bottom')}>
+                <span {...edges.getShadowProps('bottom')} data-testid="shadow-bottom" />
                 {edges.state.bottom && <button {...edges.getArrowProps('bottom')}>down</button>}
             </div>
         </div>
@@ -75,5 +77,26 @@ describe('useScrollEdges', () => {
         const list = prepare(0);
         expect(list.getAttribute('style')).toContain('mask-image');
         expect(list.getAttribute('style')).toContain('20%');
+    });
+
+    it('shows the shadows of the overflowing edges without masking the container', () => {
+        render(<List shadow={{ size: '12px' }} />);
+        const list = prepare(0);
+        const top = screen.getByTestId('shadow-top');
+        const bottom = screen.getByTestId('shadow-bottom');
+        expect(list.getAttribute('style') ?? '').not.toContain('mask-image');
+        expect(top.hasAttribute('data-visible')).toBe(false);
+        expect(top.style.opacity).toBe('0');
+        expect(bottom.hasAttribute('data-visible')).toBe(true);
+        expect(bottom.style.opacity).toBe('1');
+        expect(bottom.style.height).toBe('12px');
+        expect(bottom.getAttribute('aria-hidden')).toBe('true');
+    });
+
+    it('keeps the shadows hidden while the option is off', () => {
+        render(<List />);
+        prepare(200);
+        expect(screen.getByTestId('shadow-bottom').hasAttribute('data-visible')).toBe(false);
+        expect(screen.getByTestId('shadow-top').style.opacity).toBe('0');
     });
 });

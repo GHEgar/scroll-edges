@@ -1,13 +1,14 @@
 import { useCallback, useEffect, useMemo, useState, useSyncExternalStore } from 'react';
 import type { CSSProperties, HTMLAttributes } from 'react';
-import { createScrollEdges, edgeMask } from '../core/index.js';
-import type { Edge, EdgeMap, EdgeState, MaskOptions, ScrollEdgesOptions } from '../core/index.js';
+import { createScrollEdges, edgeMask, edgeShadow } from '../core/index.js';
+import type { Edge, EdgeMap, EdgeState, MaskOptions, ScrollEdgesOptions, ShadowOptions } from '../core/index.js';
 
 export type Jump = boolean | { items: number; min: number };
 
 export interface UseScrollEdgesOptions extends ScrollEdgesOptions {
     jump?: Jump | undefined;
     mask?: boolean | MaskOptions | undefined;
+    shadow?: boolean | ShadowOptions | undefined;
     behavior?: ScrollBehavior | undefined;
     labels?: Partial<EdgeMap<string>> | undefined;
 }
@@ -26,6 +27,13 @@ export interface ContainerProps {
 export interface AnchorProps {
     style: CSSProperties;
     'data-edge': Edge;
+}
+
+export interface ShadowProps {
+    style: CSSProperties;
+    'data-edge': Edge;
+    'data-visible': EdgeFlag;
+    'aria-hidden': true;
 }
 
 export interface ArrowProps {
@@ -57,7 +65,7 @@ const anchorStyle = (edge: Edge, inset: number): CSSProperties => {
 };
 
 export function useScrollEdges(options: UseScrollEdgesOptions = {}) {
-    const { axis, threshold, sticky, jump = false, mask = false, behavior = 'smooth', labels } = options;
+    const { axis, threshold, sticky, jump = false, mask = false, shadow = false, behavior = 'smooth', labels } = options;
     const [edges] = useState(() => createScrollEdges({ axis, threshold, sticky }));
 
     useEffect(() => {
@@ -89,6 +97,17 @@ export function useScrollEdges(options: UseScrollEdgesOptions = {}) {
         'data-edge': edge,
     });
 
+    const shadowOptions = typeof shadow === 'object' ? shadow : {};
+    const getShadowProps = (edge: Edge): ShadowProps => {
+        const visible = Boolean(shadow) && state[edge];
+        return {
+            style: edgeShadow(edge, visible, shadowOptions),
+            'data-edge': edge,
+            'data-visible': flag(visible),
+            'aria-hidden': true,
+        };
+    };
+
     const jumpable = isJumpable(jump);
     const getArrowProps = (edge: Edge): ArrowProps => {
         if (!jumpable) return { 'data-edge': edge, 'aria-hidden': true };
@@ -112,5 +131,6 @@ export function useScrollEdges(options: UseScrollEdgesOptions = {}) {
         getContainerProps,
         getAnchorProps,
         getArrowProps,
+        getShadowProps,
     };
 }

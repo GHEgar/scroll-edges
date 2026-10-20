@@ -17,7 +17,11 @@ test('the sticky list flags its edges and keeps the top arrow below the header',
     await expect(page.getByTestId('sticky-pill-top')).toHaveText('top: false');
     await expect(page.getByTestId('sticky-arrow-top')).toHaveCount(0);
 
+    await expect(page.getByTestId('sticky-shadow-bottom')).toHaveAttribute('data-visible', '');
+    await expect(page.getByTestId('sticky-shadow-top')).not.toHaveAttribute('data-visible');
+
     await scrollTo(page, 'sticky', 0, 200);
+    await expect(page.getByTestId('sticky-shadow-top')).toHaveAttribute('data-visible', '');
     await expect(list).toHaveAttribute('data-overflow-top', '');
     await expect(list).toHaveAttribute('data-overflow-bottom', '');
     const header = await page.getByTestId('sticky-header').boundingBox();

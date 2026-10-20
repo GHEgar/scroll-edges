@@ -6,17 +6,19 @@ const LAYERS = ['Roads', 'Rivers', 'Parcels', 'Buildings', 'Contours', 'Schools'
 const YEARS = Array.from({ length: 14 }, (_, index) => 2011 + index);
 
 export function StickyList() {
-    const { state, getContainerProps, getAnchorProps, getArrowProps } = useScrollEdges({ jump: true });
+    const { state, getContainerProps, getAnchorProps, getArrowProps, getShadowProps } = useScrollEdges({ jump: true, shadow: true });
     return (
         <section className="panel">
-            <h2>Sticky header · jump arrows</h2>
+            <h2>Sticky header · edge shadows · jump arrows</h2>
             <div {...getContainerProps({ className: 'box v', 'data-testid': 'sticky' })}>
                 <div className="header" data-sticky="" data-testid="sticky-header">Layers</div>
                 <div {...getAnchorProps('top')} className="anchor">
+                    <span {...getShadowProps('top')} className="shadow" data-testid="sticky-shadow-top" />
                     {state.top && <button {...getArrowProps('top')} className="arrow" data-testid="sticky-arrow-top"><ChevronUp size={22} stroke={2} /></button>}
                 </div>
                 {LAYERS.map((layer) => <div key={layer} className="item">{layer}</div>)}
                 <div {...getAnchorProps('bottom')} className="anchor">
+                    <span {...getShadowProps('bottom')} className="shadow" data-testid="sticky-shadow-bottom" />
                     {state.bottom && <button {...getArrowProps('bottom')} className="arrow" data-testid="sticky-arrow-bottom"><ChevronDown size={22} stroke={2} /></button>}
                 </div>
             </div>

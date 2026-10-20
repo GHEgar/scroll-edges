@@ -39,3 +39,21 @@ export interface MaskStyle {
     maskComposite?: 'intersect';
     WebkitMaskComposite?: 'source-in';
 }
+
+export interface ShadowOptions {
+    size?: string;
+    color?: string;
+}
+
+export interface ShadowStyle {
+    position: 'absolute';
+    top?: number;
+    right?: number;
+    bottom?: number;
+    left?: number;
+    width?: string;
+    height?: string;
+    background?: string;
+    opacity?: number;
+    pointerEvents?: 'none';
+}

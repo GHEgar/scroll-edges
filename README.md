@@ -4,7 +4,7 @@
 [![size](https://img.shields.io/bundlejs/size/scroll-edges)](https://bundlejs.com/?q=scroll-edges)
 [![license](https://img.shields.io/github/license/GHEgar/scroll-edges)](LICENSE)
 
-Headless scroll overflow for React: which edges hide content, sticky insets, jump-to-edge arrows and an edge mask.
+Headless scroll overflow for React: which edges hide content, sticky insets, jump-to-edge arrows, edge shadows and an edge mask.
 
 ![Three scroll containers showing edge flags, jump arrows and the edge mask appear and disappear while they scroll](.github/assets/demo.gif)
 
@@ -12,8 +12,8 @@ Headless scroll overflow for React: which edges hide content, sticky insets, jum
 
 scroll-edges owns the measuring — which edges of a scroll container hide content, how tall the stuck
 sticky header is, when to measure again — and you own every pixel: it ships no styles, only state,
-`data-*`/ARIA attributes and functional inline style (sticky anchors and an optional `mask-image`).
-The arrows, the color fade and the hidden scrollbar are yours.
+`data-*`/ARIA attributes and functional inline style (sticky anchors, optional edge shadows and an
+optional `mask-image`). The arrows, the colors and the hidden scrollbar are yours.
 
 ## Install
 
@@ -23,7 +23,7 @@ npm install scroll-edges
 
 | Entry | What it is | Needs |
 |---|---|---|
-| `scroll-edges` | Framework-free core: `createScrollEdges` and `edgeMask` | nothing |
+| `scroll-edges` | Framework-free core: `createScrollEdges`, `edgeShadow` and `edgeMask` | nothing |
 | `scroll-edges/react` | `useScrollEdges` with prop getters | `react >= 19` |
 
 ## Quick start
@@ -75,6 +75,23 @@ anchors after it. Render the arrow when its edge is `true`.
 `behavior` (default `'smooth'`) is the scroll behavior of the arrows, and `labels` replaces the
 English `aria-label` per edge.
 
+## Edge shadows
+
+`shadow: true` (or `{ size, color }`, defaults `'16px'` and `'rgba(0, 0, 0, 0.18)'`) shows a gradient
+band on every overflowing edge. The band lives inside the anchor, so it follows the sticky inset and
+stays below a stuck header instead of fading it; use it instead of the mask when the container has
+sticky elements. `getShadowProps(edge)` returns an absolutely positioned, `aria-hidden` element with
+`data-visible` while its edge overflows and `opacity` `0` or `1`; add your own `transition`.
+
+```tsx
+<li {...getAnchorProps('top')}>
+    <span {...getShadowProps('top')} className="shadow" />
+</li>
+```
+
+Give the anchors a `z-index` when the content has positioned elements of its own.
+`edgeShadow(edge, visible, { size, color })` returns the same style on its own.
+
 ## Edge mask
 
 `mask: true` (or `{ size }`, default `'10%'`) fades the overflowing edges with a `mask-image`
@@ -118,7 +135,7 @@ measuring.
 
 ## React
 
-`useScrollEdges(options)` takes the core options plus `jump`, `mask`, `behavior` and `labels`.
+`useScrollEdges(options)` takes the core options plus `jump`, `shadow`, `mask`, `behavior` and `labels`.
 
 | Field | |
 |---|---|
@@ -126,14 +143,15 @@ measuring.
 | `getContainerProps(props?)` | `ref`, `data-overflow-<edge>` and the mask style, merged with yours |
 | `getAnchorProps(edge)` | A zero-size sticky anchor, offset by the sticky inset |
 | `getArrowProps(edge)` | A button that jumps to the edge, or `aria-hidden` props when not jumpable |
+| `getShadowProps(edge)` | The edge shadow, visible while the edge overflows and `shadow` is on |
 | `jumpable` | Whether the arrows are buttons |
 | `mask` | The mask style alone |
 | `scrollToEdge(edge)`, `check()`, `ref` | Imperative helpers |
 
 ## Known limitations
 
-- The mask fades everything painted by the container, sticky headers included. Keep `size` small or
-  put the header outside the masked element when it must stay crisp.
+- The mask fades everything painted by the container, sticky headers included. Use the edge shadows
+  instead, or put the header outside the masked element when it must stay crisp.
 - Changes that resize neither the container, a direct child nor a sticky element (a transform, a
   nested absolutely positioned element) are not seen: call `check()`.
 - Until the container mounts, and on the server, every edge is `false`.
