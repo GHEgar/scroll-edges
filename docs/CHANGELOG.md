@@ -5,6 +5,10 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y 
 
 ## [No publicado]
 
+### Cambiado
+
+- El `demo.gif` del README se regrabó con las sombras de orilla de la 0.2.
+
 ## [0.2.0] - 2026-10-19
 
 ### Agregado
